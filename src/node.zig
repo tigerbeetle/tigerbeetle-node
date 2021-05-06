@@ -16,7 +16,7 @@ const CreateTransferResults = tb.CreateTransferResults;
 const CommitTransferResults = tb.CommitTransferResults;
 
 const Operation = @import("tigerbeetle/src/state_machine.zig").Operation;
-const MessageBus = @import("tigerbeetle/src/message_bus.zig").MessageBus;
+const MessageBus = @import("tigerbeetle/src/message_bus.zig").MessageBusClient;
 const Client = @import("tigerbeetle/src/client.zig").Client;
 const IO = @import("tigerbeetle/src/io.zig").IO;
 
@@ -113,7 +113,7 @@ const Context = struct {
             allocator,
             cluster,
             context.configuration[0..configuration.len],
-            .{ .client = id },
+            id,
             context.io,
         );
         errdefer context.message_bus.deinit();
