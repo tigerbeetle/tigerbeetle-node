@@ -122,7 +122,7 @@ const Context = struct {
             allocator,
             id,
             cluster,
-            configuration_raw,
+            @intCast(u16, configuration.len),
             &context.message_bus,
         );
         errdefer context.client.deinit();
