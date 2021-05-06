@@ -18,7 +18,7 @@ pub fn register_function(env: c.napi_env, exports: c.napi_value, comptime name: 
 pub fn throw(env: c.napi_env, comptime message: [*:0]const u8) error{ExceptionThrown} {
     var result = c.napi_throw_error(env, null, message);
     switch (result) {
-        .napi_ok => {},
+        .napi_ok, .napi_pending_exception => {},
         else => unreachable,
     }
 
@@ -160,6 +160,19 @@ pub fn u64_from_object(env: c.napi_env, object: c.napi_value, comptime key: [*:0
     return result;
 }
 
+pub fn u128_from_value(env: c.napi_env, value: c.napi_value, comptime error_message: [*:0]const u8) !u128 {
+    var is_buffer: bool = undefined;
+    assert(c.napi_is_buffer(env, value, &is_buffer) == .napi_ok);
+    if (!is_buffer) return throw(env, error_message);
+
+    var data: ?*c_void = null;
+    var data_length: usize = undefined;
+    assert(c.napi_get_buffer_info(env, value, &data, &data_length) == .napi_ok);
+    if (data_length != @sizeOf(u128)) return throw(env, error_message ++ " Must be 128-bit.");
+
+    return @ptrCast(*u128, @alignCast(@alignOf(u128), data.?)).*; // TODO: @Isaac please review.
+}
+
 pub fn u32_from_value(env: c.napi_env, val: c.napi_value, comptime key: [*:0]const u8) !u32 {
     var result: u32 = undefined;
     // TODO Check whether this will coerce signed numbers to a u32:
@@ -180,7 +193,7 @@ pub fn u128_into_object(
     val: u128,
     comptime error_message: [*:0]const u8,
 ) !void {
-    const buffer = try create_buffer(env, @bitCast([]u8, val), error_message);
+    const buffer = try create_buffer(env, std.mem.asBytes(&val), error_message);
 
     if (c.napi_set_named_property(env, object, key, buffer) != .napi_ok) {
         return throw(env, error_message);

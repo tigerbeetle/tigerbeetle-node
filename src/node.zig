@@ -172,6 +172,7 @@ fn decode_from_object(comptime T: type, env: c.napi_env, object: c.napi_value) !
             .credit_reserved_limit = try translate.u64_from_object(env, object, "credit_reserved_limit"),
             .credit_accepted_limit = try translate.u64_from_object(env, object, "credit_accepted_limit"),
         },
+        u128 => try translate.u128_from_value(env, object, "Account lookup must be an id."),
         else => unreachable,
     };
 }
@@ -242,6 +243,8 @@ fn encode_napi_results_array(
                 try translate.u128_into_object(env, napi_object, "id", result.id, "Failed to set property \"id\" of account lookup result.");
 
                 try translate.u128_into_object(env, napi_object, "custom", result.custom, "Failed to set property \"custom\" of account lookup result.");
+
+                try translate.u64_into_object(env, napi_object, "flags", @bitCast(u64, result.flags), "Failed to set property \"flags\" of account lookup result.");
 
                 try translate.u64_into_object(env, napi_object, "unit", result.unit, "Failed to set property \"unit\" of account lookup result.");
 
