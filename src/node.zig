@@ -250,11 +250,11 @@ fn encode_napi_results_array(
 
                 try translate.u64_into_object(env, napi_object, "debit_reserved", result.debit_reserved, "Failed to set property \"debit_reserved\" of account lookup result.");
 
-                try translate.u64_into_object(env, napi_object, "debit_accpeted", result.debit_accepted, "Failed to set property \"debit_accepted\" of account lookup result.");
+                try translate.u64_into_object(env, napi_object, "debit_accepted", result.debit_accepted, "Failed to set property \"debit_accepted\" of account lookup result.");
 
                 try translate.u64_into_object(env, napi_object, "credit_reserved", result.credit_reserved, "Failed to set property \"credit_reserved\" of account lookup result.");
 
-                try translate.u64_into_object(env, napi_object, "credit_accpeted", result.credit_accepted, "Failed to set property \"credit_accepted\" of account lookup result.");
+                try translate.u64_into_object(env, napi_object, "credit_accepted", result.credit_accepted, "Failed to set property \"credit_accepted\" of account lookup result.");
 
                 try translate.u64_into_object(env, napi_object, "debit_reserved_limit", result.debit_reserved_limit, "Failed to set property \"debit_reserved_limit\" of account lookup result.");
 
