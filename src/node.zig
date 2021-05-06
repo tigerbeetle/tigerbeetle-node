@@ -113,7 +113,7 @@ const Context = struct {
             allocator,
             cluster,
             context.configuration[0..configuration.len],
-            .{ .client = id },
+            id,
             context.io,
         );
         errdefer context.message_bus.deinit();
