@@ -263,10 +263,10 @@ pub fn u32_from_value(env: c.napi_env, value: c.napi_value, comptime name: [:0]c
         return throw(env, name ++ " cannot be NaN.");
     }
     if (std.math.isInf(float)) {
-        return throw(env, name ++ " cannot be Infinity.");
+        return throw(env, name ++ " cannot be infinity.");
     }
     // TODO: integer check
-    std.math.
+    //std.math.
 
     // TODO: -ve check
 

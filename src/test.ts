@@ -53,18 +53,41 @@ test.skip = (name: string, fn: () => Promise<void>) => {
 }
 
 test('fails if NaN or infinity is used for the `code`', async (): Promise<void> => {
-  const account = { ...accountA, id: 0n, code: NaN }
+  // Create an array of accounts with each type of violation and then an array of error messages and just loop through
+  // Test NAN, infinity, negative and float
 
-  const nanError = await client.createAccounts([account]).catch(error => error)
-  assert.strictEqual(nanError.message, 'code cannot be NaN.')
+  const accounts = [
+    { ...accountA, id: 0n, unit: 0, code: NaN },
+    { ...accountA, id: 0n, unit: 0, code: Infinity },
+    { ...accountA, id: 0n, unit: 0, code: -Infinity },
+    { ...accountA, id: 0n, unit: 0, code: -1 },
+    { ...accountA, id: 0n, unit: 0, code: 0.1 },
+    { ...accountA, id: 0n, unit: NaN, code: 0 },
+    { ...accountA, id: 0n, unit: Infinity, code: 0 },
+    { ...accountA, id: 0n, unit: -Infinity, code: 0 },
+    { ...accountA, id: 0n, unit: -1, code: 0 },
+    { ...accountA, id: 0n, unit: 0.1, code: 0 },
+  ]
 
-  account.code = Infinity
-  const positiveInfinityError = await client.createAccounts([account]).catch(error => error)
-  assert.strictEqual(positiveInfinityError.message, 'code cannot be Infinity.')
+  const errorMessages = [
+    'code cannot be NaN.',
+    'code cannot be infinity.',
+    'code cannot be infinity.',
+    'code cannot be negative.',
+    'code cannot be a float.',
+    'unit cannot be NaN.',
+    'unit cannot be infinity.',
+    'unit cannot be infinity.',
+    'unit cannot be negative.',
+    'unit cannot be a float.',
+  ]
 
-  account.code = -Infinity
-  const negitiveInfinityError = await client.createAccounts([account]).catch(error => error)
-  assert.strictEqual(negitiveInfinityError.message, 'code cannot be Infinity.')
+  var index = 0;
+  while( index < accounts.length && index < errorMessages.length ) {
+    const accountError = await client.createAccounts([accounts[ index]]).catch(error => error)
+    assert.strictEqual(accountError.message, errorMessages[ index ])
+    index++
+  }
 })
 
 test('range checks `unit` and `code` on Account to be u16', async (): Promise<void> => {
