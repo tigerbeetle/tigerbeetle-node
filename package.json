@@ -42,7 +42,7 @@
     "clean": "rm -rf build dist node_modules src/zig-cache zig",
     "install:zig": "./src/tigerbeetle/scripts/install_zig.sh",
     "postinstall": "./scripts/postinstall.sh",
-    "test": "yarn build && node dist/test"
+    "test": "./scripts/tests.sh"
   },
   "author": "Coil Technologies, Inc",
   "license": "Apache-2.0",

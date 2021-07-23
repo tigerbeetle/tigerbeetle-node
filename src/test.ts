@@ -52,6 +52,21 @@ test.skip = (name: string, fn: () => Promise<void>) => {
   console.log(name + ': SKIPPED')
 }
 
+test('fails if NaN or infinity is used for the `code`', async (): Promise<void> => {
+  const account = { ...accountA, id: 0n, code: NaN }
+
+  const nanError = await client.createAccounts([account]).catch(error => error)
+  assert.strictEqual(nanError.message, 'code cannot be NaN.')
+
+  account.code = Infinity
+  const positiveInfinityError = await client.createAccounts([account]).catch(error => error)
+  assert.strictEqual(positiveInfinityError.message, 'code cannot be Infinity.')
+
+  account.code = -Infinity
+  const negitiveInfinityError = await client.createAccounts([account]).catch(error => error)
+  assert.strictEqual(negitiveInfinityError.message, 'code cannot be Infinity.')
+})
+
 test('range checks `unit` and `code` on Account to be u16', async (): Promise<void> => {
   const account = { ...accountA, id: 0n, unit: 65535 + 1 }
 
