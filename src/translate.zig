@@ -203,7 +203,7 @@ pub fn u32_from_object(env: c.napi_env, object: c.napi_value, comptime key: [:0]
         return throw(env, key ++ " must be defined");
     }
 
-    return u32_from_value(env, property, key);
+    return u32_value_from_double(env, property, key);
 }
 
 pub fn u16_from_object(env: c.napi_env, object: c.napi_value, comptime key: [:0]const u8) !u16 {
@@ -249,10 +249,21 @@ pub fn u64_from_value(env: c.napi_env, value: c.napi_value, comptime name: [:0]c
 }
 
 pub fn u32_from_value(env: c.napi_env, value: c.napi_value, comptime name: [:0]const u8) !u32 {
-    var float: f64 = undefined;
+    var result: u32 = undefined;
     // TODO Check whether this will coerce signed numbers to a u32:
     // In that case we need to use the appropriate napi method to do more type checking here.
     // We want to make sure this is: unsigned, and an integer.
+    switch (c.napi_get_value_uint32(env, value, &result)) {
+        .napi_ok => {},
+        .napi_number_expected => return throw(env, name ++ " must be a number"),
+        else => unreachable,
+    }
+    return result;
+}
+
+pub fn u32_value_from_double(env: c.napi_env, value: c.napi_value, comptime name: [:0]const u8) !u32 {
+    var float: f64 = undefined;
+
     switch (c.napi_get_value_double(env, value, &float)) {
         .napi_ok => {},
         .napi_number_expected => return throw(env, name ++ " must be a number"),
@@ -265,10 +276,14 @@ pub fn u32_from_value(env: c.napi_env, value: c.napi_value, comptime name: [:0]c
     if (std.math.isInf(float)) {
         return throw(env, name ++ " cannot be infinity.");
     }
-    // TODO: integer check
-    //std.math.
-
-    // TODO: -ve check
+    if ( float < 0) {
+        return throw(env, name ++ " cannot be negative.");
+    }
+    var float_to_int: i64 = @floatToInt(i64, float);
+    var int_to_float: f64 = @intToFloat(f64, float_to_int);
+    if (float != int_to_float) {
+        return throw(env, name ++ " cannot be a float.");
+    }
 
     return @floatToInt(u32, float);
 }

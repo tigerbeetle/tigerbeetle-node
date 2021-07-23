@@ -52,10 +52,8 @@ test.skip = (name: string, fn: () => Promise<void>) => {
   console.log(name + ': SKIPPED')
 }
 
-test('fails if NaN or infinity is used for the `code`', async (): Promise<void> => {
-  // Create an array of accounts with each type of violation and then an array of error messages and just loop through
-  // Test NAN, infinity, negative and float
-
+// This test checks for NAN, infinity, negatives and floats
+ test('`code` or `unit` fields on Account fail if they contain an incorrect number type', async (): Promise<void> => {
   const accounts = [
     { ...accountA, id: 0n, unit: 0, code: NaN },
     { ...accountA, id: 0n, unit: 0, code: Infinity },
