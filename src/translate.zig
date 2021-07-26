@@ -249,16 +249,28 @@ pub fn u64_from_value(env: c.napi_env, value: c.napi_value, comptime name: [:0]c
 }
 
 pub fn u32_from_value(env: c.napi_env, value: c.napi_value, comptime name: [:0]const u8) !u32 {
-    var result: u32 = undefined;
+    var float: f64 = undefined;
     // TODO Check whether this will coerce signed numbers to a u32:
     // In that case we need to use the appropriate napi method to do more type checking here.
     // We want to make sure this is: unsigned, and an integer.
-    switch (c.napi_get_value_uint32(env, value, &result)) {
+    switch (c.napi_get_value_double(env, value, &float)) {
         .napi_ok => {},
         .napi_number_expected => return throw(env, name ++ " must be a number"),
         else => unreachable,
     }
-    return result;
+
+    if (std.math.isNan(float)) {
+        return throw(env, name ++ " cannot be NaN.");
+    }
+    if (std.math.isInf(float)) {
+        return throw(env, name ++ " cannot be Infinity.");
+    }
+    // TODO: integer check
+    std.math.
+
+    // TODO: -ve check
+
+    return @floatToInt(u32, float);
 }
 
 pub fn u32_value_from_double(env: c.napi_env, value: c.napi_value, comptime name: [:0]const u8) !u32 {
