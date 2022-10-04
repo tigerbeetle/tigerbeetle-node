@@ -27,6 +27,11 @@ jobs:
     steps:
       - run: ./scripts/test_install_on_ubuntu.sh
 
+  test_fedora_install:
+    runs-on: ubuntu-latest
+    steps:
+      - run: ./scripts/test_install_on_fedora.sh
+
   test_rocky_install:
     runs-on: ubuntu-latest
     steps:

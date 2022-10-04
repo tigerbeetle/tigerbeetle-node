@@ -3,16 +3,14 @@ set -e
 ./scripts/build.sh
 
 id=$(docker build -q -f - . < <(echo "
-FROM rockylinux:9
+FROM fedora
 COPY . /wrk"))
 docker run -w /test $id sh -c "
 set -e
 dnf update -y
-dnf install -y xz wget git glibc
+dnf install -y xz wget git
 wget -O- -q https://rpm.nodesource.com/setup_18.x | bash -
 dnf install -y nodejs
-ldconfig -v -N
-ldd --version
 npm install /wrk
 node -e 'require("\""tigerbeetle-node"\"");'
 "
