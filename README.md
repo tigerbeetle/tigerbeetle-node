@@ -1,5 +1,5 @@
 # tigerbeetle-node
-[TigerBeetle](https://github.com/coilhq/tigerbeetle) client for Node.js.
+[TigerBeetle](https://github.com/tigerbeetledb/tigerbeetle) client for Node.js.
 
 ## Installation
 
@@ -219,7 +219,7 @@ const errors = await client.createTransfers(batch)
 To get up and running when cloning the repo:
 
 ```shell
-git clone --recurse-submodules https://github.com/coilhq/tigerbeetle-node.git
+git clone --recurse-submodules https://github.com/tigerbeetledb/tigerbeetle-node.git
 cd tigerbeetle-node/
 npm install --include dev # This will automatically install and build everything you need.
 ```

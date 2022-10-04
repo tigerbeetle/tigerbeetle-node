@@ -6,7 +6,7 @@
   "typings": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/coilhq/tigerbeetle-node.git"
+    "url": "git+https://github.com/tigerbeetledb/tigerbeetle-node.git"
   },
   "preferUnplugged": true,
   "files": [
@@ -42,13 +42,13 @@
     "prepack": "git submodule deinit --all && git submodule update --init && npm run build_tsc",
     "clean": "rm -rf build dist node_modules src/zig-cache zig"
   },
-  "author": "Coil Technologies, Inc",
+  "author": "TigerBeetle, Inc",
   "license": "Apache-2.0",
   "contributors": [
     "Donovan Changfoot <don@coil.com>",
     "Isaac Freund <isaac.freund@coil.com>",
     "Jason Bruwer <jason.bruwer@coil.com>",
-    "Joran Dirk Greef <joran@coil.com>"
+    "Joran Dirk Greef <joran@tigerbeetle.com>"
   ],
   "devDependencies": {
     "@types/node": "^14.14.41",
