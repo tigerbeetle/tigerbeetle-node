@@ -15,24 +15,29 @@ jobs:
   test_alpine_install:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - run: ./scripts/test_install_on_alpine.sh
 
   test_debian_install:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - run: ./scripts/test_install_on_debian.sh
 
   test_ubuntu_install:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - run: ./scripts/test_install_on_ubuntu.sh
 
   test_fedora_install:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - run: ./scripts/test_install_on_fedora.sh
 
   test_rocky_install:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - run: ./scripts/test_install_on_rocky.sh
