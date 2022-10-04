@@ -1,0 +1,33 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - '**'
+    tags:
+      - '*'
+  pull_request:
+    branches:
+      - 'main'
+
+jobs:
+  # These are all broken out so they run in parallel
+  test_alpine_install:
+    runs-on: ubuntu-latest
+    steps:
+      - run: ./scripts/install_on_alpine.sh
+
+  test_debian_install:
+    runs-on: ubuntu-latest
+    steps:
+      - run: ./scripts/install_on_debian.sh
+
+  test_ubuntu_install:
+    runs-on: ubuntu-latest
+    steps:
+      - run: ./scripts/install_on_ubuntu.sh
+
+  test_rocky_install:
+    runs-on: ubuntu-latest
+    steps:
+      - run: ./scripts/install_on_rocky.sh
