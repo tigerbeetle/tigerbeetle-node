@@ -138,7 +138,7 @@ const Context = struct {
         context.message_pool = try MessagePool.init(allocator, .client);
         errdefer context.message_pool.deinit(allocator);
 
-        context.addresses = try vsr.parse_addresses(allocator, addresses_raw);
+        context.addresses = try vsr.parse_addresses(allocator, addresses_raw, addresses_raw.len);
         errdefer allocator.free(context.addresses);
         assert(context.addresses.len > 0);
 
