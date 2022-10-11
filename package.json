@@ -42,7 +42,7 @@
     "prepack": "git submodule deinit --all && git submodule update --init && npm run build_tsc",
     "clean": "rm -rf build dist node_modules src/zig-cache zig"
   },
-  "author": "Coil Technologies, Inc",
+  "author": "TigerBeetle, Inc",
   "license": "Apache-2.0",
   "contributors": [
     "Donovan Changfoot <don@coil.com>",
