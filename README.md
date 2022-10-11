@@ -115,6 +115,7 @@ This creates a journal entry between two accounts.
 ```js
 const transfer = {
     id: 1n, // u128
+    pending_id: 0n, // u128
     // Double-entry accounting:
     debit_account_id: 1n,  // u128
     credit_account_id: 2n, // u128
@@ -125,9 +126,9 @@ const transfer = {
     timeout: 0n, // u64, in nano-seconds.
     // Collection of accounts usually grouped by the currency: 
     // You can't transfer money between accounts with different ledgers:
-    ledger: 720,  // u32, ledger for transfer (e.g. currency).
+    ledger: 1,  // u32, ledger for transfer (e.g. currency).
     // Chart of accounts code describing the reason for the transfer:
-    code: 1,  // u16, (e.g. deposit, settlement)
+    code: 720,  // u16, (e.g. deposit, settlement)
     flags: 0, // u16
     amount: 10n, // u64
     timestamp: 0n, //u64, Reserved: This will be set by the server.
