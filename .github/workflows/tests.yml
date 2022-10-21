@@ -11,6 +11,12 @@ on:
       - 'main'
 
 jobs:
+  shellcheck_scripts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: ./scripts/shellcheck.sh
+
   # These are all broken out so they run in parallel
   test_alpine_install:
     runs-on: ubuntu-latest
