@@ -9,6 +9,15 @@ Install the `tigerbeetle-node` module to your current working directory:
 npm install tigerbeetle-node
 ```
 
+If you run into issues, check out the distribution-specific install
+steps that are run in CI to test support:
+
+* [Alpine](./scripts/test_install_on_alpine.sh)
+* [Debian](./scripts/test_install_on_debian.sh)
+* [Fedora](./scripts/test_install_on_fedora.sh)
+* [Rocky Linux](./scripts/test_install_on_rocky.sh)
+* [Ubuntu](./scripts/test_install_on_ubuntu.sh)
+
 ### Prerequisites
 
 * NodeJS >= `14.0.0`. _(If the correct version is not installed, an installation error will occur)_
