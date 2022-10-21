@@ -42,13 +42,13 @@ jobs:
       - uses: actions/checkout@v2
       - run: ./scripts/test_install_on_fedora.sh
 
-  test_rocky_install:
+  test_rhel_install:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: ./scripts/test_install_on_rocky.sh
+      - run: ./scripts/test_install_on_rhelubi.sh
 
-  test_rocky_install:
+  test_amazonlinux_install:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

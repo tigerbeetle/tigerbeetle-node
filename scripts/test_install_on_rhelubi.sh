@@ -6,15 +6,16 @@ set -e
 
 # Prebuild the container with this directory because we have no need for its artifacts
 id=$(docker build -q -f - . < <(echo "
-FROM rockylinux:9
+FROM redhat/ubi9
 COPY . /wrk"))
 
 docker run -w /test "$id" sh -c "
 set -e
-dnf update -y
-dnf install -y xz wget git glibc
-wget -O- -q https://rpm.nodesource.com/setup_16.x | bash -
-dnf install -y nodejs
+yum update -y
+yum install -y xz wget git glibc tar
+wget -O- -q https://rpm.nodesource.com/setup_18.x | bash -
+yum install -y nodejs
+ln -s /lib64/libc.so.6 /lib64/libc.so
 npm install /wrk
 node -e 'require(\"tigerbeetle-node\");'
 "
