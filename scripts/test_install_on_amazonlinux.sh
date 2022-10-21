@@ -6,15 +6,15 @@ set -e
 
 # Prebuild the container with this directory because we have no need for its artifacts
 id=$(docker build -q -f - . < <(echo "
-FROM rockylinux:9
+FROM amazonlinux
 COPY . /wrk"))
 
 docker run -w /test "$id" sh -c "
 set -e
-dnf update -y
-dnf install -y xz wget git glibc
+yum update -y
+yum install -y xz wget git glibc tar
 wget -O- -q https://rpm.nodesource.com/setup_16.x | bash -
-dnf install -y nodejs
+yum install -y nodejs
 npm install /wrk
 node -e 'require(\"tigerbeetle-node\");'
 "

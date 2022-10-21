@@ -35,7 +35,7 @@
     "test": "node dist/test",
     "postinstall": "npm run install_zig && npm run download_node_headers && npm run build_lib",
     "install_zig": "./src/tigerbeetle/scripts/install_zig.sh",
-      "download_node_headers": "ls -lah ./scripts && cat ./scripts/download_node_headers.sh && sh ./scripts/download_node_headers.sh",
+    "download_node_headers": "./scripts/download_node_headers.sh",
     "build": "npm run build_tsc && npm run build_lib",
     "build_tsc": "./node_modules/typescript/bin/tsc",
     "build_lib": "mkdir -p dist && zig/zig build-lib -mcpu=baseline -OReleaseSafe -dynamic -lc -isystem build/node-$(node --version)/include/node src/node.zig -fallow-shlib-undefined -femit-bin=dist/client.node",
