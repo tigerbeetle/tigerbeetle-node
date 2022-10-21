@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 set -e
 
 ./scripts/build.sh
@@ -5,9 +7,9 @@ set -e
 id=$(docker build -q -f - . < <(echo "
 FROM alpine
 COPY . /wrk"))
-docker run -w /test $id sh -c "
+docker run -w /test "$id" sh -c "
 set -e
 apk add --update nodejs npm git
 npm install /wrk
-node -e 'require("\""tigerbeetle-node"\"");'
+node -e 'require(\"tigerbeetle-node\")'
 "
