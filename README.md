@@ -129,6 +129,7 @@ for (const error of errors) {
   switch (error.code) {
     case CreateAccountError.exists:
       console.error(`Batch account at ${error.index} already exists.`);
+	  break;
     default:
       console.error(`Batch account at ${error.index} failed to create: ${CreateAccountError[error.code]}.`);
   }
@@ -227,6 +228,7 @@ for (const error of errors) {
   switch (error.code) {
     case CreateTransferError.exists:
       console.error(`Batch transfer at ${error.index} already exists.`);
+	  break;
     default:
       console.error(`Batch transfer at ${error.index} failed to create: ${CreateTransferError[error.code]}.`);
   }
