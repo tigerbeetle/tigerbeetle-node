@@ -102,8 +102,8 @@ bitwise-or:
 * `CreateAccountFlags.debits_must_not_exceed_credits`
 * `CreateAccountFlags.credits_must_not_exceed_credits`
 
-For example, to set `account0` as `linked` to `account1`
-and that `account0` has `debits_must_not_exceed_credits`:
+For example, to link `account0` and `account1`, where `account0`
+additionally has the `debits_must_not_exceed_credits` constraint:
 
 ```js
 const account0 = { ... account values ... };
