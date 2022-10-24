@@ -275,7 +275,7 @@ the [Transfers
 reference](https://docs.tigerbeetle.com/reference/transfers#flags).
 
 To toggle behavior for an transfer, combine enum values stored in the
-CreateTransferFlags object (in TypeScript it is an actual enum) with
+`CreateTransferFlags` object (in TypeScript it is an actual enum) with
 bitwise-or:
 
 * `CreateTransferFlags.linked`
