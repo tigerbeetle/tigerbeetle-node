@@ -2,6 +2,8 @@
 
 set -e
 
+./scripts/build.sh
+
 # Prebuild the container with this directory because we have no need for its artifacts
 id=$(docker build -q -f - . < <(echo "
 FROM alpine
