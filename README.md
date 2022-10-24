@@ -270,7 +270,7 @@ for (let i = 0; i < 1_000_000; i += BATCH_SIZE) {
 
 ### Transfer Flags
 
-The transfer `flag` value is a bitfield. See details for these flags in
+The transfer `flags` value is a bitfield. See details for these flags in
 the [Transfers
 reference](https://docs.tigerbeetle.com/reference/transfers#flags).
 
