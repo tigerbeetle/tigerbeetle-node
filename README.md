@@ -13,10 +13,11 @@ If you run into issues, check out the distribution-specific install
 steps that are run in CI to test support:
 
 * [Alpine](./scripts/test_install_on_alpine.sh)
+* [Amazon Linux](./scripts/test_install_on_amazonlinux.sh)
 * [Debian](./scripts/test_install_on_debian.sh)
 * [Fedora](./scripts/test_install_on_fedora.sh)
-* [Rocky Linux](./scripts/test_install_on_rocky.sh)
 * [Ubuntu](./scripts/test_install_on_ubuntu.sh)
+* [RHEL](./scripts/test_install_on_rhelubi.sh)
 
 ### Prerequisites
 
