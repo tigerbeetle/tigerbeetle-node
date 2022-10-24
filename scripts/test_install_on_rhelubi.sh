@@ -17,5 +17,5 @@ wget -O- -q https://rpm.nodesource.com/setup_18.x | bash -
 yum install -y nodejs
 ln -s /lib64/libc.so.6 /lib64/libc.so
 npm install /wrk
-node -e 'require(\"tigerbeetle-node\");'
+node -e 'require(\"tigerbeetle-node\"); console.log(\"SUCCESS!\")'
 "

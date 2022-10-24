@@ -12,5 +12,5 @@ set -e
 apk add --update nodejs npm git
 
 npm install /wrk
-node -e 'require(\"tigerbeetle-node\")'
+node -e 'require(\"tigerbeetle-node\"); console.log(\"SUCCESS!\")'
 "

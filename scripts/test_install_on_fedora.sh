@@ -14,5 +14,5 @@ dnf install -y xz wget git
 wget -O- -q https://rpm.nodesource.com/setup_18.x | bash -
 dnf install -y nodejs
 npm install /wrk
-node -e 'require(\"tigerbeetle-node\");'
+node -e 'require(\"tigerbeetle-node\"); console.log(\"SUCCESS!\")'
 "
