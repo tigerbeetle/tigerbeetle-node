@@ -317,6 +317,10 @@ const errors = await client.createTransfers([post])
 
 ## Transfer Lookup: `client.lookupTransfers`
 
+NOTE: While transfer lookup exists, it is not a flexible query API. We
+are developing query APIs and there will be new methods for querying
+transfers in the future.
+
 Transfer lookup is batched, like transfer creation. Pass in all `id`s to
 fetch, and matched transfers are returned.
 
