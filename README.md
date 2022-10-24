@@ -90,7 +90,7 @@ if (errors.length) {
 
 ### Account Flags
 
-The account `flag` value is a bitfield. See details for these flags in
+The account `flags` value is a bitfield. See details for these flags in
 the [Accounts
 reference](https://docs.tigerbeetle.com/reference/accounts#flags).
 
