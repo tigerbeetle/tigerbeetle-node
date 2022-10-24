@@ -127,7 +127,7 @@ const errors = await client.createAccounts([account1, account2, account3]);
 // errors = [{ index: 1, code: 1 }];
 for (const error of errors) {
   switch (error.code) {
-    case CreateAccountError.exists: {
+    case CreateAccountError.exists:
       console.error(`Batch account at ${error.index} already exists.`);
     default:
       console.error(`Batch account at ${error.index} failed to create: ${CreateAccountError[error.code]}.`);
@@ -225,7 +225,7 @@ const errors = await client.createTransfers([transfer1, transfer2, transfer3]);
 // errors = [{ index: 1, code: 1 }];
 for (const error of errors) {
   switch (error.code) {
-    case CreateTransferError.exists: {
+    case CreateTransferError.exists:
       console.error(`Batch transfer at ${error.index} already exists.`);
     default:
       console.error(`Batch transfer at ${error.index} failed to create: ${CreateTransferError[error.code]}.`);
