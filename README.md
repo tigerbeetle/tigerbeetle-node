@@ -102,9 +102,8 @@ bitwise-or:
 * `CreateAccountFlags.debits_must_not_exceed_credits`
 * `CreateAccountFlags.credits_must_not_exceed_credits`
 
-For example, to set the following `account0` as `linked` to
-`account1` and that `account0` has the setting
-`debits_must_not_exceed_credits`:
+For example, to set `account0` as `linked` to `account1`
+and that `account0` has `debits_must_not_exceed_credits`:
 
 ```js
 const account0 = { ... account values ... };
@@ -130,8 +129,8 @@ for (const error of errors) {
   switch (error.code) {
     case CreateAccountError.exists: {
       console.error(`Batch account at ${error.index} already exists.`);
-	default:
-	  console.error(`Batch account at ${error.index} failed to create: ${CreateAccountError[error.code]}.`);
+    default:
+      console.error(`Batch account at ${error.index} failed to create: ${CreateAccountError[error.code]}.`);
   }
 }
 ```
@@ -206,8 +205,8 @@ const transfer = {
 const errors = await client.createTransfers([transfer]);
 for (const error of errors) {
   switch (error.code) {
-	default:
-	  console.error(`Batch transfer at ${error.index} failed to create: ${CreateAccountError[error.code]}.`);
+    default:
+      console.error(`Batch transfer at ${error.index} failed to create: ${CreateAccountError[error.code]}.`);
   }
 }
 ```
@@ -228,8 +227,8 @@ for (const error of errors) {
   switch (error.code) {
     case CreateTransferError.exists: {
       console.error(`Batch transfer at ${error.index} already exists.`);
-	default:
-	  console.error(`Batch transfer at ${error.index} failed to create: ${CreateTransferError[error.code]}.`);
+    default:
+      console.error(`Batch transfer at ${error.index} failed to create: ${CreateTransferError[error.code]}.`);
   }
 }
 ```
@@ -299,12 +298,16 @@ const errors = client.createTransfers([transfer0, transfer1]);
 Two-phase transfers are supported natively by toggling the appropriate
 flag. TigerBeetle will then adjust the `credits_pending` and
 `debits_pending` fields of the appropriate accounts. A corresponding
-commit transfer then needs to be sent to accept or reject the
+post pending transfer then needs to be sent to post or void the
 transfer.
 
 ##### Post a Pending Transfer
 
-With `flags = post_pending_transfer`, TigerBeetle will accept the transfer. TigerBeetle will atomically rollback the changes to `debits_pending` and `credits_pending` of the appropriate accounts and apply them to the `debits_posted` and `credits_posted` balances.
+With `flags = post_pending_transfer`, TigerBeetle will post the
+transfer. TigerBeetle will atomically rollback the changes to
+`debits_pending` and `credits_pending` of the appropriate accounts and
+apply them to the `debits_posted` and `credits_posted` balances.
+
 ```js
 const post = {
     id: 2n, // u128, must correspond to the transfer id
